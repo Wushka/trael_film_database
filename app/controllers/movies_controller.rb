@@ -38,10 +38,17 @@ class MoviesController < ApplicationController
   end
 
   def add_poster()
-    unless params["poster_url"].blank?
-      movie = Movie.find(params[:movie_id])
+    movie = Movie.find(params[:movie_id])
+    if !params["poster_url"].blank? && is_valid_url?(params["poster_url"])
       movie.add_poster(params["poster_url"])
-      redirect_to edit_movie_path(movie)
     end
+    redirect_to edit_movie_path(movie)
+  end
+
+  private def is_valid_url?(str)
+    uri = URI.parse(str)
+    uri.is_a?(URI::HTTP) && !uri.host.nil?
+    rescue URI::InvalidURIError
+    false
   end
 end
