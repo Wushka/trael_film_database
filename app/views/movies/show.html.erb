@@ -1,0 +1,24 @@
+<div>
+  <div style="height:300px">
+    <% @movie.poster_urls.each do |poster_url| %>
+      <div style="display: inline-block">
+      <img src="<%=poster_url%>" style="height:300px"><br>
+      </div>
+    <% end %>
+    <br>
+    <label>Udgivet: </label><%=@movie.release_date%>
+  </div>
+  <h4>Plot:</h4><span><%= @movie.plot %></span>
+  <h4>Skuespillere:</h4>
+  <% @movie.actors.each do |actor|%>
+    <span style="display:block"><%= actor.name%></span>
+  <% end %>
+  <h4>Genre:</h4>
+  <% @movie.genres.each do |genre|%>
+    <span style="display:block"><%= genre.name%></span>
+  <% end %>
+  <hr>
+  <%= link_to "Fjern", @movie, data: { turbo_method: :delete, turbo_confirm: "Vil du fjerne #{@movie.title} fra din liste?" } %>
+  <%= link_to "Rediger", edit_movie_path %>
+  <%= link_to "Tilbage til Liste", movies_path %>
+</div>

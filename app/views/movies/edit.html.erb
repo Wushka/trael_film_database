@@ -1,0 +1,53 @@
+<h1>Rediger film info</h1>
+<%= link_to "Tilbage til Film Info", movie_path(@movie) %>
+<br>
+<br>
+
+<%= form_with model: @movie do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title, size: "50" %>
+  </div>
+  <div>
+    <%= form.label :plot %><br>
+    <%= form.text_area :plot, size: "50x10" %><br>
+  </div>
+
+  <hr>
+  <div>
+  <h4>Skuespillere</h4>
+  <% @movie.movie_actors.preload(:actor).each do |movie_actor| %>
+    <span><%= movie_actor.actor.name%></span>
+    <%= link_to "Fjern", movie_actor, data: { turbo_method: :delete, turbo_confirm: "Vil du fjerne skuespilleren fra filmen?", movie_id: @movie.id} %>
+    <br>
+  <% end %>
+
+  <h4>Genre</h4>
+  <% @movie.movie_genres.preload(:genre).each do |movie_genre| %>
+    <span><%= movie_genre.genre.name%></span>
+    <%= link_to "Fjern", movie_genre, data: { turbo_method: :delete, turbo_confirm: "Vil du fjerne genren fra filmen?", movie_id: @movie.id} %>
+    <br>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+  <div>
+    <h4>Plakater</h4>
+    <%= form_with url: "/movies/#{@movie.id}/add_poster", method: :post do |form| %>
+      <%= form.label :poster_url %>
+      <%= form.text_field :poster_url %>
+      <%= form.submit "Tilføj Plakat"%>
+    <% end %>
+    <div>
+      <% @movie.posters.each do |poster| %>
+        <div style="display: inline-block">
+      	  <img src="<%=poster.url%>" style="height:300px"><br>
+          <%= link_to "Fjern Plakat", poster, data: { turbo_method: :delete, turbo_confirm: "Vil du fjerne plakaten fra filmen?" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

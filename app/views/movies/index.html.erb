@@ -1,0 +1,13 @@
+<h1>Favorit Film</h1>
+<%= link_to "Tilføj Film", new_movie_path%>
+<div>
+  <% @movies.each do |movie| %>
+    <div>
+      <h2><%= movie.title %></h2>
+      <img src="<%= movie.poster_urls[0] %>" height="300"></br>
+      <span><%= link_to "Detaljer", movie %></span></br>
+      <span><%= link_to "Fjern fra liste", movie, data: { turbo_method: :delete, turbo_confirm: "Vil du fjerne #{movie.title} fra din liste?" } %></span>
+    </div>
+    <hr style="width:500px;float:left">
+  <% end %>
+</div>

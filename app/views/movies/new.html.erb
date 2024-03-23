@@ -1,0 +1,22 @@
+<div>
+<%= link_to "Tilbage til Liste", movies_path %>
+<%= form_with url: new_movie_path, method: :get do |form| %>
+  <%= form.label :query, "Søg efter film titel:" %>
+  <%= form.text_field :query, value: @query%>
+  <%= form.submit "Søg" %>
+<% end %>
+  <%if @search_results%>
+    <% @search_results.each do |movie| %>
+      <%= form_with url: movies_path, method: :post do |form1| %>
+        <input type="hidden" name="imdb_id" value="<%= movie["imdbID"]%>">
+        <div>
+          <h3><%= movie["Title"] %></h3>
+          <img src="<%=movie["Poster"]%>" style="height:300px"><br/>
+          <%= form1.submit "Tilføj Til Liste"%>
+          <hr/>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>
