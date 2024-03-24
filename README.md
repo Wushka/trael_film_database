@@ -1,13 +1,17 @@
 # README
 
-Kør tests med bin/rails test:system
+Kør tests med:
+```
+bin/rails test:system
+```
 
-Indsæt api_key i bin/rails credentials:edit
-
+Ideelt er api_key i credentials
 ```
 omdb:
   api_key: "<<api_key>>"
 ```
+ men for lethedens skyld er den exposed i koden.
+
 
 Opret film ved at:
  1. Søg efter en filmtitel i feltet i toppen af "/movies/new"
