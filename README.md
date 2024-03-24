@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Kør tests med bin/rails test:system
 
-Things you may want to cover:
+Indsæt api_key i bin/rails credentials:edit
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+omdb:
+  api_key: "<<api_key>>"
