@@ -6,7 +6,7 @@ module Omdb
     API_KEY = Rails.application.credentials.omdb.api_key.freeze
     BASE_URL = "https://www.omdbapi.com/".freeze
 
-    def self.get(params)
+    def self.get(params = {})
       get_params = {apikey: API_KEY}.merge(params)
       #TODO httpstatus handling
       response = HTTP.get(BASE_URL, params: get_params).parse

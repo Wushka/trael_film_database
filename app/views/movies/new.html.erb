@@ -1,10 +1,10 @@
-<div>
 <%= link_to "Tilbage til Liste", movies_path %>
 <%= form_with url: new_movie_path, method: :get do |form| %>
   <%= form.label :query, "Søg efter film titel:" %>
   <%= form.text_field :query, value: @query%>
   <%= form.submit "Søg" %>
 <% end %>
+<div id="search_results">
   <%if @search_results%>
     <% @search_results.each do |movie| %>
       <%= form_with url: movies_path, method: :post do |form1| %>
@@ -18,5 +18,4 @@
       <% end %>
     <% end %>
   <% end %>
-
 </div>
