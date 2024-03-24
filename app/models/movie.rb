@@ -42,13 +42,12 @@ class Movie < ApplicationRecord
   def self.create_from_omdb_json(omdb_json)
       movie = Movie.create(
         title: omdb_json["Title"],
-        genre_id: omdb_json["Title"],
         plot: omdb_json["Plot"],
         release_date: DateTime.parse(omdb_json["Released"])
       )
 
       movie.add_actors(omdb_json["Actors"])
-pp omdb_json["Genre"]
+
       movie.add_genres(omdb_json["Genre"])
 
       movie.add_poster(omdb_json["Poster"]) unless omdb_json["Poster"].blank?

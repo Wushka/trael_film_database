@@ -2,6 +2,7 @@
 
 module Omdb
   class Api
+    #i don't like to put api-keys in open repositories
     API_KEY = Rails.application.credentials.omdb.api_key.freeze
     BASE_URL = "https://www.omdbapi.com/".freeze
 
